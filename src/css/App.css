@@ -1,0 +1,112 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.apiApp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.githubparent {
+  margin-top: 3em;
+}
+
+
+.githubchild {
+  margin-top: 1em;
+  font-family: 'Gill Sans';
+  font-weight: 900;
+}
+
+.form {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 40%;
+  top: 1em;
+}
+
+.usernameInput {
+  font-family: 'Gill Sans';
+  background-color: transparent;
+  font-size: 1.3em;
+  color: black;
+  height: 2em;
+  position: absolute;
+  width: 40%;
+  top: 8em;
+  border-radius: 0.5em;
+}
+
+.submitbutton {
+  margin-left: 1.5em;
+  cursor: pointer;
+  height: 2.7em;
+  width: 2.7em;
+  position: absolute;
+  top: 10.5em;
+  margin-left: 10em;
+  background: transparent;
+
+}
+
+.checkbutton {
+  margin-left: 2.5em;
+  cursor: pointer;
+  height: 2.4em;
+  width: 2.4em;
+  position: absolute;
+  top: 5.2em;
+  right: 4em;
+  background: white;
+}
+
+.namestyle {
+  position: absolute;
+  font-family: 'Gill Sans';
+  color: black;
+  font-weight: 700;
+  top: 2em;
+}
+
+.background-video{
+    position: absloute;
+    width: 100%;
+    float: left;
+    top: 0;
+    padding: none;
+}
+
+.header {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 3em; 
+  background-color: transparent; 
+  align-items: center; 
+}
+
+.header-link {
+  font-weight: 900;
+  font-family: 'Courier New';
+  font-size: 2em;
+  color: white; 
+  top: 15;
+  left: 25; 
+  cursor: pointer; 
+  text-decoration: none;  
+}
+
+.header-eazelogo {
+  height: 3em;
+  top: 0.1em;
+  left: 2em; 
+  position: absolute;
+  cursor: pointer;
+}

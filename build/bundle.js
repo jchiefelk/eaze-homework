@@ -21525,15 +21525,21 @@
 
 	var _App2 = _interopRequireDefault(_App);
 
+	var _repoinformation = __webpack_require__(254);
+
+	var _repoinformation2 = _interopRequireDefault(_repoinformation);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Routes = function Routes(props) {
 	  return _react2.default.createElement(
 	    _reactRouter.Router,
 	    props,
-	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/repoinfo', component: _repoinformation2.default })
 	  );
 	};
+
 	exports.default = Routes;
 
 /***/ },
@@ -26603,6 +26609,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -26619,14 +26627,15 @@
 
 	    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
-	    _this.state = {
+	    _this.state = _defineProperty({
 	      mainView: null,
-	      username: null,
-	      httpstatus: null,
-	      githubdata: null,
-	      storeupdated: false,
-	      editusername: false
-	    };
+	      githubdata: _store2.default.getGithubData(),
+	      httpstatus: _store2.default.getHttpStatus(),
+	      username: _store2.default.getUserName(),
+	      editusername: _store2.default.editUserName_Status(),
+	      requestsent: _store2.default.isRequestSent(),
+	      storeupdated: false
+	    }, 'editusername', false);
 	    return _this;
 	  }
 
@@ -26634,13 +26643,15 @@
 	    key: 'componentDidMount',
 	    value: function componentDidMount() {
 	      _store2.default.addChangeListener(this._onChange.bind(this));
-	      //   Actions.sendRequest()
-	      this.setState({ mainView: HTML.setUserInputForm() });
+	      this.setState({
+	        mainView: HTML.setUserInputForm()
+	      });
 	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
 	      _store2.default.removeChangeListener(this._onChange.bind(this));
+	      console.log('First Page Unmount');
 	    }
 	  }, {
 	    key: 'componentDidUpdate',
@@ -26666,14 +26677,15 @@
 	          mainView: null
 	        });
 	      }
-
-	      if (this.state.storeupdated == true && this.state.githubdata != null) {
-	        this.setState({
-	          storeupdated: false,
-	          mainView: HTML.setGithubView(this.state.githubdata)
-	        });
-	      }
-
+	      /**
+	          if(this.state.storeupdated==true && this.state.githubdata!=null){
+	              this.setState({
+	                storeupdated: false,
+	                mainView:  HTML.setGithubView(this.state.githubdata)
+	              });
+	      
+	          }
+	      ***/
 	      if (this.state.storeupdated == true && this.state.httpstatus == 404) {
 	        this.setState({
 	          storeupdated: false,
@@ -26740,7 +26752,7 @@
 
 
 	// module
-	exports.push([module.id, ".App {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.apiApp {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.githubparent {\n  margin-top: 3em;\n}\n\n\n.githubchild {\n  margin-top: 1em;\n  font-family: 'Gill Sans';\n  font-weight: 900;\n}\n\n.form {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  flex-direction: row;\n  width: 40%;\n  top: 1em;\n}\n\n.usernameInput {\n  font-family: 'Gill Sans';\n  background-color: transparent;\n  font-size: 1.3em;\n  color: black;\n  height: 2em;\n  position: absolute;\n  width: 40%;\n  top: 8em;\n  border-radius: 0.5em;\n}\n\n.submitbutton {\n  margin-left: 1.5em;\n  cursor: pointer;\n  height: 2.4em;\n  width: 2.4em;\n  position: absolute;\n  top: 10.5em;\n  margin-left: 10em;\n  background: white;\n}\n\n.checkbutton {\n  margin-left: 2.5em;\n  cursor: pointer;\n  height: 2.4em;\n  width: 2.4em;\n  position: absolute;\n  top: 5.2em;\n  right: 4em;\n  background: white;\n}\n\n.namestyle {\n  position: absolute;\n  font-family: 'Gill Sans';\n  color: black;\n  font-weight: 700;\n  top: 2em;\n}\n\n.background-video{\n    position: absloute;\n    width: 100%;\n    float: left;\n    top: 0;\n    padding: none;\n}\n\n.header {\n  display: flex;\n  position: absolute;\n  width: 100%;\n  height: 3em; \n  background-color: transparent; \n  align-items: center; \n}\n\n.header-link {\n  font-weight: 900;\n  font-family: 'Courier New';\n  font-size: 2em;\n  color: white; \n  top: 15;\n  left: 25; \n  cursor: pointer; \n  text-decoration: none;  \n}\n\n.header-eazelogo {\n  height: 3em;\n  top: 0.1em;\n  left: 2em; \n  position: absolute;\n  cursor: pointer;\n}", ""]);
+	exports.push([module.id, ".App {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.apiApp {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n\n.githubparent {\n  margin-top: 3em;\n}\n\n\n.githubchild {\n  margin-top: 1em;\n  font-family: 'Gill Sans';\n  font-weight: 900;\n}\n\n.form {\n  position: absolute;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  flex-direction: row;\n  width: 40%;\n  top: 1em;\n}\n\n.usernameInput {\n  font-family: 'Gill Sans';\n  background-color: transparent;\n  font-size: 1.3em;\n  color: black;\n  height: 2em;\n  position: absolute;\n  width: 40%;\n  top: 8em;\n  border-radius: 0.5em;\n}\n\n.submitbutton {\n  margin-left: 1.5em;\n  cursor: pointer;\n  height: 2.7em;\n  width: 2.7em;\n  position: absolute;\n  top: 10.5em;\n  margin-left: 10em;\n  background: transparent;\n\n}\n\n.checkbutton {\n  margin-left: 2.5em;\n  cursor: pointer;\n  height: 2.4em;\n  width: 2.4em;\n  position: absolute;\n  top: 5.2em;\n  right: 4em;\n  background: white;\n}\n\n.namestyle {\n  position: absolute;\n  font-family: 'Gill Sans';\n  color: black;\n  font-weight: 700;\n  top: 2em;\n}\n\n.background-video{\n    position: absloute;\n    width: 100%;\n    float: left;\n    top: 0;\n    padding: none;\n}\n\n.header {\n  display: flex;\n  position: absolute;\n  width: 100%;\n  height: 3em; \n  background-color: transparent; \n  align-items: center; \n}\n\n.header-link {\n  font-weight: 900;\n  font-family: 'Courier New';\n  font-size: 2em;\n  color: white; \n  top: 15;\n  left: 25; \n  cursor: pointer; \n  text-decoration: none;  \n}\n\n.header-eazelogo {\n  height: 3em;\n  top: 0.1em;\n  left: 2em; \n  position: absolute;\n  cursor: pointer;\n}", ""]);
 
 	// exports
 
@@ -29241,11 +29253,17 @@
 
 	'use strict';
 
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 	var AppDispatcher = __webpack_require__(245);
 	var appConstants = __webpack_require__(248);
 	var objectAssign = __webpack_require__(4);
 	var EventEmitter = __webpack_require__(249).EventEmitter;
 	var CHANGE_EVENT = 'change';
+
+	var _store = {
+	  github: null
+	};
 
 	function StoreData() {
 	  this.github = null;
@@ -29255,8 +29273,11 @@
 	  this.requestsent = false;
 	};
 
-	StoreData.prototype.updateGithub = function (item) {
+	StoreData.prototype.sortGithubData = function (item) {
+	  console.log('sorting github data');
+	};
 
+	StoreData.prototype.updateGithub = function (item) {
 	  this.github = [];
 	  for (var x = 0; x < item.length; x++) {
 	    this.github.push({
@@ -29265,6 +29286,30 @@
 	      watchers: item[x].watchers
 	    });
 	  };
+
+	  var sorted = {};
+	  //
+	  // hashtable with seperated chaining
+	  for (var x = 0; x < item.length; x++) {
+	    if (sorted[item[x].watchers] == undefined) {
+	      sorted[item[x].watchers] = [];
+
+	      sorted[item[x].watchers].push(_defineProperty({
+	        index: x,
+	        watchers: item[x].watchers,
+	        name: item[x].name,
+	        description: item[x].description
+	      }, 'watchers', item[x].watchers));
+	    } else {
+	      sorted[item[x].watchers].push(_defineProperty({
+	        index: x,
+	        watchers: item[x].watchers,
+	        name: item[x].name,
+	        description: item[x].description
+	      }, 'watchers', item[x].watchers));
+	    }
+	  };
+	  _store.github = sorted;
 	};
 
 	var Data = new StoreData();
@@ -29280,7 +29325,8 @@
 	    this.emit(CHANGE_EVENT);
 	  },
 	  getGithubData: function getGithubData() {
-	    return Data.github;
+
+	    return _store.github;
 	  },
 	  getHttpStatus: function getHttpStatus() {
 	    return Data.httpstatus;
@@ -30019,6 +30065,8 @@
 
 	var _header2 = _interopRequireDefault(_header);
 
+	var _reactRouter = __webpack_require__(179);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function HTML() {
@@ -30045,7 +30093,7 @@
 					}
 				}),
 				_react2.default.createElement('img', {
-					src: 'https://s3-us-west-1.amazonaws.com/cointelmob/icons/enter_icon.png',
+					src: 'https://s3-us-west-2.amazonaws.com/jchiefelkportfolio/enter-circle.png',
 					className: 'submitbutton',
 					onClick: function onClick() {
 						_actions2.default.editUserName(false);
@@ -30071,37 +30119,50 @@
 						} },
 					item
 				),
-				_react2.default.createElement('img', { src: 'https://s3-us-west-1.amazonaws.com/cointelmob/icons/check.png', className: 'checkbutton', onClick: function onClick() {
-						return _actions2.default.sendRequest(item);
-					} })
+				_react2.default.createElement(
+					_reactRouter.Link,
+					{ to: '/repoinfo', onClick: function onClick() {
+							return _actions2.default.sendRequest(item);
+						} },
+					' ',
+					_react2.default.createElement('img', { src: 'https://s3-us-west-1.amazonaws.com/cointelmob/icons/check.png', className: 'checkbutton' }),
+					' '
+				)
 			)
 		);
 	};
 
 	HTML.prototype.setGithubView = function (item) {
+
 		var view = [];
-		for (var x = 0; x < item.length; x++) {
-			view.push(_react2.default.createElement(
-				'div',
-				{ className: 'githubchild', key: x },
-				_react2.default.createElement(
-					'h2',
-					null,
-					item[x].name
-				),
-				_react2.default.createElement(
-					'h5',
-					null,
-					'Number of Watchers: ',
-					item[x].watchers
-				),
-				_react2.default.createElement(
-					'h5',
-					null,
-					item[x].description
-				)
-			));
+
+		for (var key in item) {
+			var data = item[key];
+
+			for (var x = 0; x < data.length; x++) {
+				view.push(_react2.default.createElement(
+					'div',
+					{ className: 'githubchild', key: Math.random(x) },
+					_react2.default.createElement(
+						'h2',
+						null,
+						data[x].name
+					),
+					_react2.default.createElement(
+						'h5',
+						null,
+						'Number of Watchers: ',
+						data[x].watchers
+					),
+					_react2.default.createElement(
+						'h5',
+						null,
+						data[x].description
+					)
+				));
+			};
 		};
+
 		return _react2.default.createElement(
 			'div',
 			{ className: 'apiApp' },
@@ -30109,7 +30170,7 @@
 			_react2.default.createElement(
 				'div',
 				{ className: 'githubparent' },
-				view
+				view.reverse()
 			)
 		);
 	};
@@ -30223,8 +30284,9 @@
 						view: _react2.default.createElement(
 							'video',
 							{
-								id: 'background-video',
 								poster: 'http://powertoinhale.com/wp/wp-content/uploads/2015/12/eaze-to-deliver-cannabis-products-to-your-door-step-within-no-time.jpg',
+								className: 'background-video',
+
 								onEnded: function onEnded() {
 									_this3.setState({
 										ended: true,
@@ -30324,6 +30386,109 @@
 	}(_react.Component);
 
 	exports.default = Header;
+
+/***/ },
+/* 254 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(235);
+
+	var _store = __webpack_require__(244);
+
+	var _store2 = _interopRequireDefault(_store);
+
+	var _actions = __webpack_require__(250);
+
+	var _actions2 = _interopRequireDefault(_actions);
+
+	var _reactRouter = __webpack_require__(179);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var HTML = __webpack_require__(251);
+
+	var RepoInformation = function (_Component) {
+	  _inherits(RepoInformation, _Component);
+
+	  function RepoInformation() {
+	    _classCallCheck(this, RepoInformation);
+
+	    var _this = _possibleConstructorReturn(this, (RepoInformation.__proto__ || Object.getPrototypeOf(RepoInformation)).call(this));
+
+	    _this.state = {
+	      mainView: null,
+	      githubdata: _store2.default.getGithubData(),
+	      storeupdated: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(RepoInformation, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      _store2.default.addChangeListener(this._onChange.bind(this));
+
+	      if (this.state.githubdata != null) {
+	        this.setState({
+	          mainView: HTML.setGithubView(this.state.githubdata)
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      console.log('Unmounting');
+	      _store2.default.removeChangeListener(this._onChange.bind(this));
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate() {
+	      // console.log(this.state.githubdata);
+	      if (this.state.storeupdated == true && this.state.githubdata != null) {
+	        this.setState({
+	          storeupdated: false,
+	          mainView: HTML.setGithubView(this.state.githubdata)
+	        });
+	      }
+	    }
+	  }, {
+	    key: '_onChange',
+	    value: function _onChange() {
+	      this.setState({
+	        githubdata: _store2.default.getGithubData(),
+	        storeupdated: true
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+
+	      return this.state.mainView;
+	    }
+	  }]);
+
+	  return RepoInformation;
+	}(_react.Component);
+
+	exports.default = RepoInformation;
 
 /***/ }
 /******/ ]);

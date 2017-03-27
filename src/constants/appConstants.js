@@ -1,0 +1,8 @@
+var appConstants = {
+  SEND_REQUEST: "SEND_REQUEST",
+  HTTPSTATUS: "HTTPSTATUS",
+  GITHUB: "GITHUB",
+  USERNAME: "USERNAME",
+  EDITUSERNAME: "EDITUSERNAME"
+};
+module.exports = appConstants;
