@@ -22,12 +22,13 @@
     "style-loader": "^0.16.0",
     "webpack": "^1.14.0"
   },
+  
   "scripts": {
     "dev_start": "node server/app.js",
     "dev_build": "webpack --config webpack.config.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
-  },
+  }
 
 }
