@@ -28,14 +28,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  
-  top: 5em;
+  top: 15em;
 }
 
 .usernameInput {
   font-family: 'Gill Sans';
   background-color: transparent;
-  font-size: 1.3em;
+  font-size: 1.2em;
   color: black;
   height: 2em;
   position: absolute;
@@ -50,7 +49,7 @@
   height: 2.7em;
   width: 2.7em;
   position: absolute;
-  top: 10.5em;
+  top: 9.65em;
   left: 23em;
   background: transparent;
 
