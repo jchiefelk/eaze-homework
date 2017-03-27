@@ -28,7 +28,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  top: 15em;
+  top: 5em;
 }
 
 .usernameInput {
@@ -50,7 +50,7 @@
   width: 2.7em;
   position: absolute;
   top: 9.65em;
-  left: 23em;
+  left: 5em;
   background: transparent;
 
 }
